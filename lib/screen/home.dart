@@ -5,18 +5,67 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset("assets/images/cat1.jpg", width: 200, height: 200),
-        SizedBox(height: 20),
-        Image.network(
-          "https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg",
-          width: 200,
-          height: 200,
-        )
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            style: TextButton.styleFrom(foregroundColor: const Color.fromARGB(255, 112, 31, 31),
+            ),
+            onPressed: (){
+              print("กดปุ่มแล้ว TextBuuton");
+            },
+            child: Text(
+              "กดปุ่มนี้",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+           ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 171, 80, 1),
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: (){
+              print("กดปุ่มแล้ว FilledBuuton");
+            },
+            child: Text(
+              "กดปุ่มนี้",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 20),
+          OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 1, 171, 32),
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: (){
+              print("กดปุ่มแล้ว FilledBuuton");
+            },
+            child: Text(
+              "กดปุ่มนี้",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 160, 3, 124),
+              foregroundColor: const Color.fromARGB(255, 255, 140, 140),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: (){
+              print("กดปุ่มแล้ว FilledBuuton");
+            },
+            child: Text(
+              "กดปุ่มนี้",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+          ),
+        ],
+      ),
     );
   }
 }
