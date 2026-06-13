@@ -10,7 +10,6 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  List data = ["สมชาย", "สมศรี", "สมปอง", "สมหมาย", "สมจิตร"];
 
   @override
   Widget build (BuildContext context) {
@@ -21,6 +20,7 @@ class _ItemState extends State<Item> {
           decoration: BoxDecoration(
             border: Border.all(color: const Color.fromARGB(255, 179, 14, 14)),
             borderRadius: BorderRadius.circular(10),
+            color: people[index].job.color,
           ),
           margin: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
           padding: EdgeInsets.all(40),
@@ -39,15 +39,15 @@ class _ItemState extends State<Item> {
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    "อาชีพ: ${people[index].job}",
-                    style: const TextStyle(fontSize: 16),
+                    "อาชีพ: ${people[index].job.title}",
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ],
               ),
-              Icon(
-                Icons.person,
-                size: 50,
-                color: const Color.fromARGB(255, 14, 179, 14),
+              Image.asset(
+                people[index].job.image,
+                width: 80,
+                height: 80,
               ),
             ],
           ),
