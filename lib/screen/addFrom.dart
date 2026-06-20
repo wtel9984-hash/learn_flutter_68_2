@@ -6,23 +6,21 @@ class AddForm extends StatefulWidget {
   const AddForm({super.key});
 
   @override
-  State<AddForm> createState() => _MyWidgetState();
+  State<AddForm> createState() => _AddFormState();
 }
 
-class _MyWidgetState extends State<AddForm> {
-  final _formKey = GlobalKey<FormState>();
+class _AddFormState extends State<AddForm> {
+  final _formkey = GlobalKey<FormState>();
   String _name = "";
   int _age = 20;
-  Job _job = Job.developer;
+  Job?_job = Job.developer;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Add Person",
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: Text("App Person"),
-          backgroundColor: Colors.amber,
+          title: const Text("Add Person"),
+          backgroundColor: Colors.green,
           centerTitle: true,
         ),
         body: Padding(
@@ -34,44 +32,40 @@ class _MyWidgetState extends State<AddForm> {
           //       decoration: InputDecoration(labelText: "Age"),
           //       keyboardType: TextInputType.number,
           //     ),
-          //     DropdownButtonFormField<Job>(
-          //       decoration: const InputDecoration(labelText: "Job"),
-          //       items: Job.values.map((job) {
-          //         return DropdownMenuItem<Job>(
-          //           value: job,
-          //           child: Text(job.title),
-          //         );
+          //     DropdownButtonFormField(
+          //       decoration: InputDecoration(labelText: "Job"),
+          //       items: Job.values.map((key){
+          //         return DropdownMenuItem(value: key, child: Text(key.title));
           //       }).toList(),
           //       onChanged: (value) {
-          //         print("Selected Job : ${value?.title}");
+          //         print("Selected Job: ${value?.title}");
           //       },
           //     ),
           //     SizedBox(height: 20),
           //     FilledButton(
-          //       onPressed:  (){
+          //       onPressed: () {
 
           //       },
           //       style: FilledButton.styleFrom(
-          //         backgroundColor: Colors.blue,
-          //         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+          //         backgroundColor: Colors.green,
+          //         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           //       ),
           //       child: Text(
-          //         "Summit",
-          //         style: TextStyle(color: Colors.deepOrange, fontSize: 20),
+          //         "Submit",
+          //         style: TextStyle(color: Colors.white, fontSize: 20),
           //       ),
-          //     ),
+          //     )
           //   ],
           // ),
           child: Form(
-            key: _formKey,
+            key: _formkey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(labelText: "Name"),
+                  decoration: InputDecoration(labelText: "Name"),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "please enter a name";
+                      return "กรุณากรอกชื่อ";
                     }
                     return null;
                   },
@@ -80,25 +74,26 @@ class _MyWidgetState extends State<AddForm> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(labelText: "Age"),
+                  decoration: InputDecoration(labelText: "Age"),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'please enter age';
+                      return "กรุณากรอกอายุ";
                     }
                     if (int.tryParse(value) == null) {
-                      return 'please enter a valid number';
+                      return "กรุณากรอกตัวเลข";
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _age = int.tryParse(value ?? '') ?? 20;
+                    _age = int.tryParse(value ?? "") ?? 20;
                   },
                 ),
-                DropdownButtonFormField<Job>(
-                  decoration: const InputDecoration(labelText: "Job"),
+                DropdownButtonFormField<Job?>(
+                  decoration: InputDecoration(labelText: "Job"),
+                  initialValue: _job,
                   items: Job.values.map((job) {
-                    return DropdownMenuItem<Job>(
+                    return DropdownMenuItem(
                       value: job,
                       child: Text(job.title),
                     );
@@ -111,32 +106,33 @@ class _MyWidgetState extends State<AddForm> {
                 ),
                 SizedBox(height: 20),
                 FilledButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _formKey.currentState?.save();
-                      print("Name : $_name , Age : $_age , Job : ${_job?.title}");
+                  onPressed: (){
+                    if(_formkey.currentState!.validate()){
+                      _formkey.currentState!.save();
+                      print("Name: $_name, Age: $_age, Job: ${_job?.title}");
 
                       setState(() {
-                        people.add(Person(name: _name, age: _age, job: _job));
+                        people.add(Person(name: _name, age: _age, job: _job!));
                       });
 
-                      _formKey.currentState?.reset();
+                      _formkey.currentState!.reset();
+
+                      Navigator.pop(context);
                     }
                   },
                   style: FilledButton.styleFrom(
-                    backgroundColor: Colors.black87,
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 50), 
+                    backgroundColor: Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                   ),
                   child: Text(
                     "Submit",
-                    style: TextStyle(color: Colors.deepOrangeAccent , fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 )
               ],
             ),
-          ),
-        ),
-      ),
+          )
+        )
     );
   }
 }
