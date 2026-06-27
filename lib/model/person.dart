@@ -51,7 +51,7 @@ class Person {
   const Person({required this.name, required this.age, required this.job});
 }
 
-const List<Person> people = [
+final List<Person> people = [
   Person(name: "สมชาย", age: 30, job: Job.developer),
   Person(name: "สมศรี", age: 28, job: Job.teacher),
   Person(name: "สมปอง", age: 35, job: Job.doctor),

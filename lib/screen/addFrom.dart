@@ -117,7 +117,7 @@ class _AddFormState extends State<AddForm> {
 
                       _formkey.currentState!.reset();
 
-                      Navigator.pop(context);
+                      Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   },
                   style: FilledButton.styleFrom(
